@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic Navigation</title>
+  <link rel="stylesheet" href="nav.css"> 
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+  
+  <header>
+    <nav class="navbar">
+      <div class="logo">JAGAT<span>EDUCATION</span></div>
+      
+      <ul class="nav-links" id="navLinks">
+        <li style="--i:1"><a href="index.html">Home</a></li>
+        <li style="--i:2"><a href="about.html">About Us</a></li>
+        <li style="--i:3"><a href="features.html">Features</a></li>
+        <li style="--i:4"><a href="test_package.html">Test Packages</a></li>
+        <li style="--i:5"><a href="contact.html">Contact</a></li>
+        <li style="--i:6"><a href="login.html" class="btn-login">Login/Register</a></li>
+      </ul>
+
+      <div class="menu-toggle" id="menuToggle">
+        <i class="fas fa-bars"></i>
+      </div>
+    </nav>
+  </header>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+    const icon = menuToggle.querySelector('i');
+
+    menuToggle.addEventListener('click', () => {
+      // Toggle Menu
+      navLinks.classList.toggle('active');
+
+      // Toggle Icon between Hamburger and X
+      if (navLinks.classList.contains('active')) {
+        icon.classList.remove('fa-bars');
+        icon.classList.add('fa-times');
+      } else {
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      }
+    });
+
+    // Close menu when a link is clicked
+    document.querySelectorAll('#navLinks a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('active');
+        icon.classList.remove('fa-times');
+        icon.classList.add('fa-bars');
+      });
+    });
+  </script>
+</body>
+</html>
