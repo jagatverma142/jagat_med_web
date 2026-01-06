@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Home from "../pages/Home";
+import Home from "./Pages/Home";
+import Navbar from "./Components/Navbar";
+import Footer from "./Components/Footer";
 
 // import Subjects from "./pages/Subjects";
 // import Material from "./pages/Material";
@@ -11,7 +12,6 @@ import Home from "../pages/Home";
 function App() {
   return (
     <>
-      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         {/* <Route path="/subjects" element={<Subjects />} />

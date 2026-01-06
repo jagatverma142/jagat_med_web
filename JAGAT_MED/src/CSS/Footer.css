@@ -1,0 +1,238 @@
+/* --- Footer Variables --- */
+:root {
+  --footer-bg: #111827; /* Very Dark Blue/Black */
+  --footer-text: #9ca3af;
+  --footer-white: #f9fafb;
+  --accent-green: #2ecc71;
+}
+
+/* --- Main Container --- */
+.footer-container {
+  position: relative;
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  margin-top: 100px; /* Space from content above */
+}
+
+/* --- SVG Wave --- */
+.footer-wave {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  line-height: 0;
+  transform: rotate(180deg);
+  margin-top: -1px; /* Remove gap */
+}
+
+.footer-wave svg {
+  position: relative;
+  display: block;
+  width: calc(100% + 1.3px);
+  height: 60px; /* Adjust wave height */
+}
+
+.footer-wave .shape-fill {
+  fill: #f8fafc; /* Matches body background color */
+}
+
+/* --- Content Wrapper --- */
+.footer-content {
+  padding: 80px 8% 20px;
+}
+
+/* --- Grid Layout --- */
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 3rem;
+  margin-bottom: 3rem;
+}
+
+/* --- Typography --- */
+.footer-logo {
+  font-size: 1.8rem;
+  color: var(--footer-white);
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.highlight {
+  color: var(--accent-green);
+}
+
+.footer-desc {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  max-width: 300px;
+}
+
+.footer-col h3 {
+  color: var(--footer-white);
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+/* --- Links Styling --- */
+.footer-col ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-col ul li {
+  margin-bottom: 0.8rem;
+}
+
+.footer-col ul li a {
+  color: var(--footer-text);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+  display: inline-block;
+}
+
+.footer-col ul li a:hover {
+  color: var(--accent-green);
+  transform: translateX(5px); /* Slide effect */
+}
+
+/* --- Newsletter Form --- */
+.newsletter-form .input-group {
+  display: flex;
+  background: rgba(255, 255, 255, 0.1);
+  padding: 5px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.newsletter-form input {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  width: 100%;
+  outline: none;
+}
+
+.btn-send {
+  background: var(--accent-green);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.btn-send:hover {
+  transform: scale(1.1);
+}
+
+/* --- Social Icons --- */
+.social-links {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.social-icon {
+  background: rgba(255, 255, 255, 0.05);
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 1.2rem;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.social-icon:hover {
+  background: var(--accent-green);
+  border-color: var(--accent-green);
+  transform: translateY(-3px);
+}
+
+/* --- Footer Bottom --- */
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.9rem;
+}
+
+.legal-links a {
+  color: var(--footer-text);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.legal-links a:hover {
+  color: var(--footer-white);
+}
+
+.divider {
+  margin: 0 10px;
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.back-to-top {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: var(--footer-text);
+  padding: 5px 15px;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.back-to-top:hover {
+  background: var(--footer-white);
+  color: var(--footer-bg);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 1024px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr; /* 2 Columns */
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-grid {
+    grid-template-columns: 1fr; /* 1 Column */
+    text-align: center;
+  }
+
+  .brand-col {
+    margin-bottom: 1rem;
+  }
+  
+  .footer-desc {
+    margin: 0 auto 1.5rem auto;
+  }
+
+  .newsletter-form .input-group {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    gap: 1rem;
+    text-align: center;
+  }
+}
