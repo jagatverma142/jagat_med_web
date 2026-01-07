@@ -1,236 +1,218 @@
 import React, { useState } from 'react';
-import '../CSS/PhysicsPage.css'; 
-import '../CSS/Navbar.css';
-import '../CSS/Footer.css';
+import '../CSS/PhysicsPage.css'; // Ensure CSS file is in the same folder
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
 const PhysicsPage = () => {
-  const [activeTab, setActiveTab] = useState('class11');
-  const [searchQuery, setSearchQuery] = useState(''); // Search State
-  const [showTools, setShowTools] = useState(false);  // Floating Menu State
-  const [openFaq, setOpenFaq] = useState(null);
+  const [searchTerm, setSearchTerm] = useState('');
+  const [openFaqIndex, setOpenFaqIndex] = useState(null);
 
+  // Toggle FAQ
   const toggleFaq = (index) => {
-    setOpenFaq(openFaq === index ? null : index);
+    setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Syllabus Data
-  const curriculum = {
-    class11: [
-      { id: 1, title: 'Units & Measurements', progress: 100, difficulty: 'Easy', topics: 5, status: 'Review' },
-      { id: 2, title: 'Motion in a Straight Line', progress: 80, difficulty: 'Medium', topics: 8, status: 'Continue' },
-      { id: 3, title: 'Laws of Motion', progress: 45, difficulty: 'Hard', topics: 10, status: 'Continue' },
-      { id: 4, title: 'Work, Energy & Power', progress: 10, difficulty: 'Medium', topics: 9, status: 'Continue' },
-      { id: 5, title: 'Rotational Motion', progress: 0, difficulty: 'Hard', topics: 14, status: 'Start' },
-      { id: 6, title: 'Gravitation', progress: 0, difficulty: 'Medium', topics: 7, status: 'Start' },
-      { id: 7, title: 'Thermodynamics', progress: 0, difficulty: 'Hard', topics: 6, status: 'Start' },
-      { id: 8, title: 'Oscillations (SHM)', progress: 0, difficulty: 'Medium', topics: 8, status: 'Start' },
-      { id: 9, title: 'Waves', progress: 0, difficulty: 'Hard', topics: 10, status: 'Start' },
-      { id: 10, title: 'Mechanical Properties of Fluids', progress: 20, difficulty: 'Medium', topics: 8, status: 'Continue' },
-    ],
-    class12: [
-      { id: 1, title: 'Electric Charges & Fields', progress: 90, difficulty: 'Medium', topics: 12, status: 'Review' },
-      { id: 2, title: 'Electrostatic Potential', progress: 60, difficulty: 'Medium', topics: 8, status: 'Continue' },
-      { id: 3, title: 'Current Electricity', progress: 30, difficulty: 'Hard', topics: 15, status: 'Continue' },
-      { id: 4, title: 'Moving Charges & Magnetism', progress: 0, difficulty: 'Hard', topics: 12, status: 'Start' },
-      { id: 5, title: 'Electromagnetic Induction', progress: 0, difficulty: 'Medium', topics: 7, status: 'Start' },
-      { id: 6, title: 'Ray Optics', progress: 0, difficulty: 'Hard', topics: 18, status: 'Start' },
-      { id: 7, title: 'Wave Optics', progress: 0, difficulty: 'Hard', topics: 9, status: 'Start' },
-      { id: 8, title: 'Dual Nature of Radiation', progress: 0, difficulty: 'Easy', topics: 5, status: 'Start' },
-      { id: 9, title: 'Semiconductors', progress: 0, difficulty: 'Medium', topics: 10, status: 'Start' },
-      { id: 10, title: 'Atoms & Nuclei', progress: 0, difficulty: 'Easy', topics: 6, status: 'Start' },
-    ]
-  };
-
-  const faqData = [
-    { question: "Is NCERT enough for Physics NEET?", answer: "NCERT is the foundation, but for Physics, you need extensive numerical practice. Our 'Masterclass' modules include NCERT-based questions plus advanced application problems." },
-    { question: "How do I manage Class 11 backlog?", answer: "Start with high-weightage topics like Mechanics and Heat. Dedicate 2 days a week specifically for Class 11 revision while continuing Class 12." },
-    { question: "Are these questions video-solution enabled?", answer: "Yes! Every single question in the practice set comes with a detailed video solution explaining the core concept." },
-    { question: "What is the difficulty level of the tests?", answer: "The tests are adaptive. They start at an Easy/Medium level and automatically adjust to Hard as your accuracy improves." },
+  // Dummy Data for Chapters (Extended)
+  const chapters = [
+    {
+      id: 1, title: 'Units & Measurements', description: 'Dimensional analysis, error calculation and significant figures.', difficulty: 'Easy', progress: 100,
+    },
+    {
+      id: 2, title: 'Kinematics', description: 'Motion in 1D & 2D, vectors, projectiles and relative velocity.', difficulty: 'Medium', progress: 65,
+    },
+    {
+      id: 3, title: 'Laws of Motion', description: 'Newtons laws, friction, circular motion and dynamics.', difficulty: 'Hard', progress: 30,
+    },
+    {
+      id: 4, title: 'Work, Energy & Power', description: 'Conservation of energy, collisions and potential energy curves.', difficulty: 'Medium', progress: 0,
+    },
+    {
+      id: 5, title: 'Rotational Motion', description: 'Moment of inertia, torque, angular momentum and rolling motion.', difficulty: 'Hard', progress: 10,
+    },
+    {
+      id: 6, title: 'Gravitation', description: 'Keplers laws, gravitational potential, and escape velocity.', difficulty: 'Easy', progress: 0,
+    },
+    {
+      id: 7, title: 'Thermodynamics', description: 'Laws of thermodynamics, heat engines, and entropy.', difficulty: 'Hard', progress: 0,
+    }
   ];
 
-  const activeData = activeTab === 'class11' ? curriculum.class11 : curriculum.class12;
+  // Quick Resources Data
+  const resources = [
+    { id: 1, title: 'Formula Sheet', icon: '📐', desc: 'All formulas in one place' },
+    { id: 2, title: 'PYQ Papers', icon: '📝', desc: 'Last 10 years questions' },
+    { id: 3, title: 'Flashcards', icon: '⚡', desc: 'Quick revision mode' },
+    { id: 4, title: 'Mock Tests', icon: '🎯', desc: 'Test your knowledge' },
+  ];
 
-  // Search Filter Logic
-  const filteredChapters = activeData.filter(chapter => 
-    chapter.title.toLowerCase().includes(searchQuery.toLowerCase())
+  // FAQ Data
+  const faqs = [
+    { question: "Is this course sufficient for NEET/JEE?", answer: "Yes, our content covers the entire NCERT syllabus along with advanced problem-solving techniques required for competitive exams." },
+    { question: "How can I clear my backlogs?", answer: "Use our 'One Shot' videos in the Revision section. Focus on high-weightage chapters first like Mechanics and Electrodynamics." },
+    { question: "Are the mock tests free?", answer: "We offer 5 free full-length mock tests. For more, you can upgrade to the premium plan." },
+    { question: "Can I download notes for offline use?", answer: "Yes, all chapter notes and formula sheets are downloadable in PDF format from the resources section." }
+  ];
+
+  // Filter Logic
+  const filteredChapters = chapters.filter(chapter =>
+    chapter.title.toLowerCase().includes(searchTerm.toLowerCase())
   );
-
-  const getStatusClass = (status) => {
-    switch(status) {
-      case 'Review': return 'outline-glow';
-      case 'Continue': return 'filled-glow';
-      default: return 'filled-glow start-btn'; 
-    }
-  };
 
   return (
     <>
+      {/* Navbar Container */}
       <div className="nav" style={{ position: 'relative', zIndex: 1000 }}>
         <Navbar />
       </div> 
-      
-      <div className="physics-dynamic-container">
+    
+      <div className="physics-wrapper" style={{ position: 'relative', zIndex: 1 }}>
         
-        {/* --- Header --- */}
-        <header className="physics-header-dynamic">
-          <div className="header-bg-grid"></div>
-          <div className="header-bg-particles"></div>
-          
-          <div className="header-content z-rel">
-            <span className="subject-tag-neon">NEET / JEE Prep</span>
-            <h1 className="neon-text">Physics Concepts</h1>
-            <p className="neon-subtext">Master the forces of the universe. High-yield concepts derived from first principles.</p>
-          </div>
+        {/* --- Header Section --- */}
+        <header className="phys-header">
+          <span className="phys-tag">Physics Class 11</span>
+          <h1 className="phys-title">Master Concepts</h1>
+          <p className="phys-subtitle">
+            Track your daily progress, solve challenges, and dominate your exams with interactive learning.
+          </p>
 
-          <div className="stats-row-neon z-rel">
-            <div className="stat-item-neon">
-              <span className="stat-num-neon">32</span>
-              <span className="stat-label-neon">Chapters</span>
+          {/* Stats Row */}
+          <div className="phys-stats-row">
+            <div className="phys-stat-item">
+              <span className="phys-stat-num">{chapters.length}</span>
+              <span className="phys-stat-label">Chapters</span>
             </div>
-            <div className="stat-item-neon no-border">
-              <span className="stat-num-neon">5k+</span>
-              <span className="stat-label-neon">Numericals</span>
+            <div className="phys-stat-item">
+              <span className="phys-stat-num">85%</span>
+              <span className="phys-stat-label">Accuracy</span>
             </div>
-            <div className="stat-item-neon">
-              <span className="stat-num-neon">Daily</span>
-              <span className="stat-label-neon">Practice</span>
+            <div className="phys-stat-item">
+              <span className="phys-stat-num">12d</span>
+              <span className="phys-stat-label">Streak</span>
             </div>
           </div>
         </header>
 
-        {/* --- Tabs --- */}
-        <div className="tab-container-neon">
-          <button 
-            className={`tab-btn-neon ${activeTab === 'class11' ? 'active' : ''}`} 
-            onClick={() => {setActiveTab('class11'); setSearchQuery('');}}
-          >
-            Class 11 (Mechanics)
-          </button>
-          <button 
-            className={`tab-btn-neon ${activeTab === 'class12' ? 'active' : ''}`} 
-            onClick={() => {setActiveTab('class12'); setSearchQuery('');}}
-          >
-            Class 12 (Electro/Optics)
-          </button>
+        {/* --- Daily Challenge Banner (New Feature) --- */}
+        <div className="phys-banner-container">
+          <div className="phys-challenge-banner">
+            <div className="phys-banner-text">
+              <h3>🔥 Daily Challenge</h3>
+              <p>Solve 5 questions on <strong>Rotational Motion</strong> to keep your streak alive!</p>
+            </div>
+            <button className="phys-btn-banner">Accept Challenge</button>
+          </div>
         </div>
 
-        {/* --- NEW: Feature 1 - Neon Search Bar --- */}
-        <div className="search-container">
-          <div className="search-wrapper">
-            <span className="search-icon">🔍</span>
-            <input 
-              type="text" 
-              placeholder="Search chapters (e.g., Optics, Force)..." 
-              className="neon-search-input"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
+        {/* --- Search Section --- */}
+        <div className="phys-search-container">
+          <div className="phys-search-wrapper">
+            <svg className="phys-search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="11" cy="11" r="8"></circle>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+            <input
+              type="text"
+              className="phys-search-input"
+              placeholder="Search chapters or topics..."
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
         </div>
 
-        {/* --- NEW: Feature 2 - Daily Challenge Widget --- */}
-        {!searchQuery && (
-          <div className="daily-challenge-section">
-            <div className="challenge-card">
-              <div className="challenge-icon">⚡</div>
-              <div className="challenge-content">
-                <h4>Daily Orbit Challenge</h4>
-                <p>Solve today's high-yield numerical on <strong>Rotational Motion</strong>.</p>
-              </div>
-              <button className="challenge-btn">Solve Now</button>
-            </div>
-          </div>
-        )}
+        {/* --- Quick Resources Section (New Feature) --- */}
+        <div className="phys-section-title">
+            <h2>Quick Resources</h2>
+        </div>
+        <div className="phys-resources-grid">
+            {resources.map(res => (
+                <div key={res.id} className="phys-resource-card">
+                    <span className="phys-res-icon">{res.icon}</span>
+                    <div className="phys-res-info">
+                        <h4>{res.title}</h4>
+                        <p>{res.desc}</p>
+                    </div>
+                </div>
+            ))}
+        </div>
 
         {/* --- Chapters Grid --- */}
-        <section className="chapters-grid-dynamic">
+        <div className="phys-section-title">
+            <h2>All Chapters</h2>
+        </div>
+        <div className="phys-chapters-grid">
           {filteredChapters.length > 0 ? (
-            filteredChapters.map((chapter, index) => (
-              <div key={chapter.id} className="chapter-card-dynamic" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="card-top">
-                  <span className={`badge-dynamic ${chapter.difficulty.toLowerCase()}`}>{chapter.difficulty}</span>
-                  <span className="topic-count-dynamic">{chapter.topics} Topics</span>
+            filteredChapters.map((chapter) => (
+              <div key={chapter.id} className="phys-chapter-card">
+                
+                <div className="phys-card-top">
+                  <span className={`phys-badge ${chapter.difficulty.toLowerCase()}`}>
+                    {chapter.difficulty}
+                  </span>
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
+                    <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
+                  </svg>
                 </div>
-                
-                <h3>{chapter.title}</h3>
-                
-                <div className="progress-section">
-                  <div className="progress-labels-dynamic">
-                    <span>Concept Mastery</span>
+
+                <h3 className="phys-card-title">{chapter.title}</h3>
+                <p className="phys-desc">{chapter.description}</p>
+
+                <div className="phys-progress-container">
+                  <div className="phys-progress-info">
+                    <span>Progress</span>
                     <span>{chapter.progress}%</span>
                   </div>
-                  <div className="progress-bar-bg-dynamic">
+                  <div className="phys-progress-bg">
                     <div 
-                      className="progress-bar-fill-dynamic" 
+                      className="phys-progress-fill" 
                       style={{ width: `${chapter.progress}%` }}
-                    >
-                      <div className="progress-glow"></div>
-                    </div>
+                    ></div>
                   </div>
                 </div>
 
-                <div className="card-footer">
-                  <button className={`action-btn-dynamic ${getStatusClass(chapter.status)}`}>
-                    {chapter.status === 'Start' ? 'Initialize' : chapter.status}
-                  </button>
-                  {chapter.progress > 0 ? (
-                    <span className="last-accessed-dynamic">Resume Session</span>
-                  ) : (
-                    <span className="last-accessed-dynamic">Not started</span>
-                  )}
-                </div>
+                <button className="phys-btn-start">
+                  {chapter.progress > 0 ? 'Continue' : 'Start Learning'}
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                    <polyline points="12 5 19 12 12 19"></polyline>
+                  </svg>
+                </button>
+
               </div>
             ))
           ) : (
-            <div className="no-results">
-              <p>No chapters found matching "{searchQuery}"</p>
+            <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#94a3b8', padding: '2rem' }}>
+              No chapters found matching "{searchTerm}"
             </div>
           )}
-        </section>
+        </div>
 
-        {/* --- FAQ SECTION --- */}
-        <section className="faq-section-neon">
-          <h2 className="faq-title">Frequency Asked Questions</h2>
-          <div className="faq-grid">
-            {faqData.map((item, index) => (
-              <div 
-                key={index} 
-                className={`faq-item ${openFaq === index ? 'open' : ''}`}
-                onClick={() => toggleFaq(index)}
-              >
-                <div className="faq-question">
-                  <span>{item.question}</span>
-                  <span className="faq-icon">{openFaq === index ? '−' : '+'}</span>
-                </div>
-                <div className="faq-answer">
-                  <div className="answer-content">
-                    {item.answer}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        {/* --- NEW: Feature 3 - Floating Tools Menu --- */}
-        <div className={`floating-tools-container ${showTools ? 'open' : ''}`}>
-          <div className="tools-menu">
-            <button className="tool-item">📐 Formula Sheet</button>
-            <button className="tool-item">🧮 Calculator</button>
-            <button className="tool-item">📝 Notes</button>
-          </div>
-          <button className="fab-main-btn" onClick={() => setShowTools(!showTools)}>
-            {showTools ? '✖' : '🛠️'}
-          </button>
+        {/* --- FAQ Section (New Feature) --- */}
+        <div className="phys-faq-section">
+            <h2 className="phys-faq-title">Frequently Asked Questions</h2>
+            <div className="phys-faq-list">
+                {faqs.map((faq, index) => (
+                    <div 
+                        key={index} 
+                        className={`phys-faq-item ${openFaqIndex === index ? 'open' : ''}`}
+                        onClick={() => toggleFaq(index)}
+                    >
+                        <div className="phys-faq-question">
+                            {faq.question}
+                            <span className="phys-faq-icon">+</span>
+                        </div>
+                        <div className="phys-faq-answer">
+                            <p>{faq.answer}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
 
       </div>
-
-      <div className="footer">
-        <Footer />
-      </div>
+      
+      <Footer />
     </>
   );
 };

@@ -1,469 +1,474 @@
-/* --- PhysicsPage.css (Modern Dark Theme) --- */
+/* --- PhysicsPage.css (Fully Updated & Gap Fixed) --- */
 
-/* 1. Global Page Settings */
-:root {
-  --bg-primary: #0f172a;       /* Deep Slate Blue (Background) */
-  --bg-secondary: #1e293b;     /* Lighter Slate (Cards) */
-  --accent-color: #38bdf8;     /* Sky Blue (Buttons/Links) */
-  --text-main: #f1f5f9;        /* Off-white text */
-  --text-muted: #94a3b8;       /* Grey text */
-  --border-color: #334155;     /* Subtle borders */
-}
-
-.physics-dynamic-container {
-  background-color: var(--bg-primary);
+.physics-wrapper {
+  /* Theme Variables */
+  --phys-bg-dark: #0f172a;        
+  --phys-bg-card: rgba(30, 41, 59, 0.65);
+  --phys-accent: #38bdf8;         
+  --phys-text-main: #f1f5f9;      
+  --phys-text-muted: #94a3b8;     
+  --phys-border: rgba(148, 163, 184, 0.15); 
+  --phys-gradient: linear-gradient(135deg, #38bdf8 0%, #818cf8 100%);
+  
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: var(--phys-bg-dark);
+  color: var(--phys-text-main);
   min-height: 100vh;
-  color: var(--text-main);
-  font-family: 'Inter', sans-serif;
-  padding-bottom: 4rem;
+  width: 100%;
+  
+  /* FIX 1: Bottom padding 0 kar diya taki gap na aaye */
+  padding-bottom: 0; 
+  
+  box-sizing: border-box;
+  overflow-x: hidden; 
 }
 
-/* 2. Header & Background Effects */
-.physics-header-dynamic {
+.physics-wrapper *, .physics-wrapper *::before, .physics-wrapper *::after {
+  box-sizing: border-box;
+}
+
+/* --- Animations --- */
+@keyframes physFloat {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+  100% { transform: translateY(0px); }
+}
+
+@keyframes physCardEnter {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Header Section --- */
+.phys-header {
   position: relative;
-  background: radial-gradient(circle at top, #1e293b, #0f172a);
-  padding: 4rem 2rem;
+  padding: 6rem 1.5rem 4rem; 
   text-align: center;
-  border-bottom: 1px solid var(--border-color);
+  background: radial-gradient(circle at 50% 0%, #1e293b 0%, var(--phys-bg-dark) 80%);
 }
 
-.header-bg-grid {
-  position: absolute;
-  top: 0; left: 0; width: 100%; height: 100%;
-  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
-  linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
-  background-size: 30px 30px;
-  pointer-events: none;
-}
-
-.subject-tag-neon {
+.phys-tag {
+  display: inline-block;
   background: rgba(56, 189, 248, 0.1);
-  color: var(--accent-color);
-  padding: 0.4rem 1rem;
-  border-radius: 20px;
+  color: var(--phys-accent);
+  padding: 0.5rem 1.2rem;
+  border-radius: 50px;
   font-size: 0.85rem;
-  letter-spacing: 1px;
+  font-weight: 700;
   text-transform: uppercase;
   border: 1px solid rgba(56, 189, 248, 0.2);
-  font-weight: 600;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.1);
+  animation: physFloat 4s ease-in-out infinite;
 }
 
-.neon-text {
-  font-size: 3rem;
-  margin: 1rem 0;
+.phys-title {
+  font-size: clamp(2.2rem, 5vw, 4rem); 
+  margin: 0 0 1rem 0;
   color: white;
+  font-weight: 800;
+  line-height: 1.1;
+  background: linear-gradient(to right, #fff, #94a3b8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.phys-subtitle {
+  color: var(--phys-text-muted);
+  font-size: clamp(1rem, 2vw, 1.2rem);
+  max-width: 600px;
+  margin: 0 auto 3rem;
+  line-height: 1.6;
+}
+
+.phys-stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--phys-border);
+}
+
+.phys-stat-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.phys-stat-num {
+  font-size: 2rem;
   font-weight: 700;
-  /* Soft glow instead of harsh neon */
+  color: var(--phys-text-main);
   text-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
 }
 
-.neon-subtext {
-  color: var(--text-muted);
-  font-size: 1.1rem;
-  max-width: 600px;
-  margin: 0 auto 2rem;
-}
-
-/* Stats Row */
-.stats-row-neon {
-  display: flex;
-  justify-content: center;
-  gap: 2rem;
-  margin-top: 2rem;
-}
-
-.stat-item-neon {
-  display: flex;
-  flex-direction: column;
-  padding: 0 2rem;
-  border-right: 1px solid var(--border-color);
-}
-
-.stat-item-neon.no-border {
-  border-right: none;
-}
-
-.stat-num-neon {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--text-main);
-}
-
-.stat-label-neon {
+.phys-stat-label {
   font-size: 0.8rem;
-  color: var(--text-muted);
+  color: var(--phys-text-muted);
+  text-transform: uppercase;
+  margin-top: 0.2rem;
+  letter-spacing: 1px;
 }
 
-/* 3. Tabs */
-.tab-container-neon {
+/* --- Banner (Daily Challenge) --- */
+.phys-banner-container {
+  padding: 0 2rem;
+  max-width: 1000px;
+  margin: 2rem auto 3rem;
+}
+
+.phys-challenge-banner {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.08), rgba(129, 140, 248, 0.08));
+  border: 1px solid var(--phys-accent);
+  border-radius: 20px;
+  padding: 1.5rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  box-shadow: 0 0 30px rgba(56, 189, 248, 0.05);
+  backdrop-filter: blur(5px);
+}
+
+.phys-banner-text h3 {
+  margin: 0 0 0.5rem 0;
+  color: var(--phys-accent);
+  font-size: 1.2rem;
+}
+
+.phys-banner-text p {
+  margin: 0;
+  color: var(--phys-text-muted);
+  font-size: 0.95rem;
+}
+
+.phys-btn-banner {
+  background: var(--phys-accent);
+  color: #0f172a;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.phys-btn-banner:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.4);
+}
+
+/* --- Search Bar --- */
+.phys-search-container {
   display: flex;
   justify-content: center;
-  gap: 1rem;
-  margin: -1.5rem auto 2rem;
+  padding: 0 1.5rem;
+  margin-top: -28px; 
+  margin-bottom: 3rem;
   position: relative;
   z-index: 10;
 }
 
-.tab-btn-neon {
-  background: var(--bg-primary);
-  color: var(--text-muted);
-  border: 1px solid var(--border-color);
-  padding: 1rem 2rem;
-  border-radius: 12px;
-  cursor: pointer;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  min-width: 200px;
-}
-
-.tab-btn-neon.active {
-  background: var(--bg-secondary);
-  color: var(--accent-color);
-  border-color: var(--accent-color);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-}
-
-/* 4. Search Bar */
-.search-container {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 2rem;
-  padding: 0 1rem;
-}
-
-.search-wrapper {
+.phys-search-wrapper {
   position: relative;
   width: 100%;
-  max-width: 500px;
+  max-width: 600px;
+  transition: transform 0.3s;
 }
 
-.search-icon {
-  position: absolute;
-  left: 15px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--text-muted);
+.phys-search-wrapper:hover {
+  transform: translateY(-2px);
 }
 
-.neon-search-input {
+.phys-search-input {
   width: 100%;
-  padding: 1rem 1rem 1rem 3rem;
-  border-radius: 50px;
-  border: 1px solid var(--border-color);
-  background: var(--bg-secondary);
+  padding: 1.2rem 1.5rem 1.2rem 3.5rem;
+  border-radius: 50px; 
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(15, 23, 42, 0.85); 
+  backdrop-filter: blur(12px);
   color: white;
   font-size: 1rem;
   outline: none;
   transition: all 0.3s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 }
 
-.neon-search-input:focus {
-  border-color: var(--accent-color);
-  background: #253347;
+.phys-search-input:focus {
+  border-color: var(--phys-accent);
+  box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.2), 0 10px 30px rgba(0,0,0,0.4);
 }
 
-/* 5. Daily Challenge */
-.daily-challenge-section {
-  display: flex;
-  justify-content: center;
-  margin-bottom: 3rem;
+.phys-search-icon {
+  position: absolute;
+  left: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--phys-text-muted);
 }
 
-.challenge-card {
-  background: linear-gradient(135deg, #2e1065, #1e1b4b); /* Deep Purple Dark */
-  border: 1px solid #5b21b6;
-  padding: 1rem 2rem;
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  gap: 1.5rem;
-  max-width: 700px;
+/* --- Section Titles --- */
+.phys-section-title {
+  max-width: 1280px;
+  margin: 0 auto 1.5rem;
+  padding: 0 2rem;
 }
 
-.challenge-icon {
-  font-size: 1.8rem;
-  background: rgba(255, 255, 255, 0.1);
-  width: 50px;
-  height: 50px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
+.phys-section-title h2 {
+  font-size: 1.5rem;
+  color: var(--phys-text-main);
+  border-left: 4px solid var(--phys-accent);
+  padding-left: 1rem;
 }
 
-.challenge-content h4 {
-  margin: 0;
-  color: #e9d5ff;
-}
-
-.challenge-content p {
-  margin: 0.3rem 0 0;
-  font-size: 0.9rem;
-  color: #a5b4fc;
-}
-
-.challenge-btn {
-  margin-left: auto;
-  background: #7c3aed;
-  color: white;
-  border: none;
-  padding: 0.5rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: bold;
-}
-
-/* 6. Chapters Grid */
-.chapters-grid-dynamic {
+/* --- Resources Grid --- */
+.phys-resources-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
   gap: 1.5rem;
   padding: 0 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
+  max-width: 1280px;
+  margin: 0 auto 4rem;
 }
 
-.chapter-card-dynamic {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
+.phys-resource-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid var(--phys-border);
   border-radius: 16px;
   padding: 1.5rem;
-  position: relative;
-  transition: transform 0.3s, border-color 0.3s;
-  animation: fadeIn 0.5s ease forwards;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 0.3s;
+  cursor: pointer;
+  opacity: 0;
+  animation: physCardEnter 0.5s ease-out forwards;
+  animation-delay: 0.1s;
 }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
-
-.chapter-card-dynamic:hover {
+.phys-resource-card:hover {
   transform: translateY(-5px);
-  border-color: var(--accent-color);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--phys-accent);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
 }
 
-.card-top {
+.phys-res-icon {
+  font-size: 2rem;
+}
+
+.phys-res-info h4 {
+  margin: 0;
+  color: var(--phys-text-main);
+  font-size: 1.1rem;
+}
+
+.phys-res-info p {
+  margin: 0.3rem 0 0;
+  font-size: 0.85rem;
+  color: var(--phys-text-muted);
+}
+
+/* --- Chapters Grid --- */
+.phys-chapters-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 0 2rem;
+  max-width: 1280px;
+  margin: 0 auto 4rem;
+}
+
+.phys-chapter-card {
+  background: var(--phys-bg-card);
+  border: 1px solid var(--phys-border);
+  border-radius: 24px;
+  padding: 2rem;
+  transition: all 0.4s;
+  backdrop-filter: blur(10px);
+  position: relative;
+  opacity: 0;
+  animation: physCardEnter 0.6s ease-out forwards;
+}
+
+.phys-chapter-card:nth-child(1) { animation-delay: 0.1s; }
+.phys-chapter-card:nth-child(2) { animation-delay: 0.2s; }
+.phys-chapter-card:nth-child(3) { animation-delay: 0.3s; }
+
+.phys-chapter-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(56, 189, 248, 0.4);
+  background: linear-gradient(to bottom right, rgba(30, 41, 59, 0.9), rgba(15, 23, 42, 0.9));
+  box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.4);
+}
+
+.phys-card-top {
   display: flex;
   justify-content: space-between;
-  margin-bottom: 1rem;
-}
-
-.badge-dynamic {
-  padding: 0.2rem 0.6rem;
-  border-radius: 6px;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-
-.badge-dynamic.easy { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
-.badge-dynamic.medium { background: rgba(234, 179, 8, 0.2); color: #facc15; }
-.badge-dynamic.hard { background: rgba(239, 68, 68, 0.2); color: #f87171; }
-
-.topic-count-dynamic {
-  color: var(--text-muted);
-  font-size: 0.8rem;
-}
-
-.chapter-card-dynamic h3 {
-  margin: 0 0 1.5rem 0;
-  font-size: 1.3rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-/* Progress Bar */
-.progress-section {
   margin-bottom: 1.5rem;
 }
 
-.progress-labels-dynamic {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.8rem;
-  margin-bottom: 0.5rem;
-  color: var(--text-muted);
-}
-
-.progress-bar-bg-dynamic {
-  width: 100%;
-  height: 6px;
-  background: #334155;
-  border-radius: 3px;
-  overflow: hidden;
-}
-
-.progress-bar-fill-dynamic {
-  height: 100%;
-  background: var(--accent-color);
-  border-radius: 3px;
-}
-
-/* Card Footer */
-.card-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-top: auto;
-}
-
-.action-btn-dynamic {
-  padding: 0.6rem 1.2rem;
-  border-radius: 8px;
-  cursor: pointer;
-  font-weight: 600;
-  font-size: 0.9rem;
-  transition: all 0.2s;
-}
-
-.filled-glow {
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--accent-color);
-  border: 1px solid transparent;
-}
-
-.filled-glow:hover {
-  background: var(--accent-color);
-  color: #0f172a;
-}
-
-.outline-glow {
-  background: transparent;
-  color: var(--text-main);
-  border: 1px solid var(--border-color);
-}
-
-.outline-glow:hover {
-  border-color: var(--text-main);
-}
-
-.start-btn {
-  background: #2563eb;
-  color: white;
-  border: none;
-}
-
-.last-accessed-dynamic {
-  font-size: 0.8rem;
-  color: var(--text-muted);
-}
-
-/* 7. FAQ Section */
-.faq-section-neon {
-  max-width: 800px;
-  margin: 4rem auto;
-  padding: 0 1rem;
-}
-
-.faq-title {
-  text-align: center;
-  color: var(--text-main);
-  margin-bottom: 2rem;
-}
-
-.faq-item {
-  background: var(--bg-secondary);
-  border: 1px solid var(--border-color);
-  margin-bottom: 1rem;
+.phys-badge {
+  padding: 0.4rem 1rem;
   border-radius: 10px;
-  overflow: hidden;
-  transition: all 0.3s;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+}
+.phys-badge.easy { background: rgba(34, 197, 94, 0.15); color: #4ade80; border: 1px solid rgba(34, 197, 94, 0.2); }
+.phys-badge.medium { background: rgba(234, 179, 8, 0.15); color: #facc15; border: 1px solid rgba(234, 179, 8, 0.2); }
+.phys-badge.hard { background: rgba(239, 68, 68, 0.15); color: #f87171; border: 1px solid rgba(239, 68, 68, 0.2); }
+
+.phys-card-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--phys-text-main);
 }
 
-.faq-item.open {
-  border-color: var(--accent-color);
-}
-
-.faq-question {
-  padding: 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  cursor: pointer;
-  font-weight: 500;
-  color: var(--text-main);
-}
-
-.faq-answer {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-  background: rgba(0, 0, 0, 0.2);
-}
-
-.faq-item.open .faq-answer {
-  max-height: 200px;
-}
-
-.answer-content {
-  padding: 1.2rem;
-  color: #cbd5e1;
-  font-size: 0.95rem;
+.phys-desc {
+  font-size: 0.9rem;
+  color: var(--phys-text-muted);
+  margin-bottom: 2rem;
   line-height: 1.6;
 }
 
-/* 8. Floating Tools */
-.floating-tools-container {
-  position: fixed;
-  bottom: 2rem;
-  right: 2rem;
-  z-index: 2000;
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-end;
-  gap: 1rem;
+.phys-progress-container {
+  margin-bottom: 1.5rem;
 }
 
-.fab-main-btn {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--accent-color);
-  color: #0f172a;
-  border: none;
-  font-size: 1.5rem;
+.phys-progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--phys-text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.phys-progress-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.phys-progress-fill {
+  height: 100%;
+  border-radius: 10px;
+  background: var(--phys-gradient);
+  transition: width 1s ease-out;
+}
+
+.phys-btn-start {
+  width: 100%;
+  padding: 1rem;
+  border: 1px solid var(--phys-border);
+  border-radius: 14px;
+  background: transparent;
+  color: var(--phys-text-main);
+  font-weight: 700;
   cursor: pointer;
-  box-shadow: 0 0 20px rgba(56, 189, 248, 0.4);
-  transition: transform 0.3s;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.fab-main-btn:hover {
-  transform: scale(1.1) rotate(90deg);
-}
-
-.tools-menu {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  opacity: 0;
-  transform: translateY(20px);
-  pointer-events: none;
   transition: all 0.3s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
 }
 
-.floating-tools-container.open .tools-menu {
-  opacity: 1;
-  transform: translateY(0);
-  pointer-events: all;
-}
-
-.tool-item {
-  background: white;
+.phys-btn-start:hover {
+  background: var(--phys-accent);
   color: #0f172a;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  font-weight: bold;
-  cursor: pointer;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  border-color: var(--phys-accent);
+  box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
 }
 
-.no-results {
-  grid-column: 1 / -1;
+/* --- FAQ Section --- */
+.phys-faq-section {
+  max-width: 800px;
+  /* FIX 2: Margin bottom hataya aur padding bottom add kiya */
+  margin: 0 auto; 
+  padding: 0 1.5rem 6rem; /* 6rem padding footer se duri banaye rakhega */
+}
+
+.phys-faq-title {
   text-align: center;
-  color: var(--text-muted);
-  padding: 3rem;
+  margin-bottom: 2rem;
+  color: var(--phys-text-main);
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.phys-faq-item {
+  background: rgba(30, 41, 59, 0.4);
+  border: 1px solid var(--phys-border);
+  border-radius: 16px;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.phys-faq-item.open {
+  border-color: var(--phys-accent);
+  background: rgba(30, 41, 59, 0.8);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+.phys-faq-question {
+  padding: 1.2rem 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 600;
+  color: var(--phys-text-main);
+  user-select: none;
+}
+
+.phys-faq-icon {
+  font-size: 1.5rem;
+  color: var(--phys-accent);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.phys-faq-item.open .phys-faq-icon {
+  transform: rotate(45deg);
+}
+
+.phys-faq-answer {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease-out;
+  background: rgba(15, 23, 42, 0.3);
+}
+
+.phys-faq-item.open .phys-faq-answer {
+  max-height: 500px; 
+}
+
+.phys-faq-answer p {
+  padding: 1.5rem;
+  margin: 0;
+  color: var(--phys-text-muted);
+  line-height: 1.6;
+  font-size: 0.95rem;
+}
+
+/* --- Mobile Breakpoints --- */
+@media (max-width: 768px) {
+  .phys-header { padding: 5rem 1rem 3rem; }
+  .phys-stats-row { gap: 1.5rem; display: grid; grid-template-columns: 1fr 1fr; }
+  .phys-banner-container { padding: 0 1rem; margin-top: 1rem; }
+  .phys-challenge-banner { text-align: center; justify-content: center; }
+  .phys-search-container { padding: 0 1rem; margin-top: -20px; }
+  .phys-chapters-grid, .phys-resources-grid { grid-template-columns: 1fr; padding: 0 1rem; }
+  
+  .phys-resource-card { padding: 1.2rem; }
+  .phys-chapter-card { padding: 1.5rem; }
+  
+  /* Mobile pe thoda extra padding */
+  .phys-faq-section { padding-bottom: 4rem; }
 }
