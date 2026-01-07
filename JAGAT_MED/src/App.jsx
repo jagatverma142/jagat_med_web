@@ -20,7 +20,8 @@ function App() {
         {/* <Route path="/material" element={<Material />} /> */}
         {/* <Route path="/practice" element={<Practice />} /> */}
         {/* <Route path="/updates" element={<Updates />} /> */}
-        {/* <Route path="/login" element={<Login />} /> */} */}
+   {/* <Route path="/login" element={<Login />} /> */}
+
       </Routes>
     </>
   );

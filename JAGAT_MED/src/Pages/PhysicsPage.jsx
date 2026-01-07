@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../CSS/PhysicsPageDynamic.css'; 
+import '../CSS/PhysicsPage.css'; 
 import '../CSS/Navbar.css';
 import '../CSS/Footer.css';
 import Navbar from '../Components/Navbar';
