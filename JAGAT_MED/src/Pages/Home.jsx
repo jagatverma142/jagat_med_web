@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Footer from '../Components/Footer';
 import '../App.css'; 
 
 const Home = () => {
@@ -212,9 +211,7 @@ const Home = () => {
         </div>
       </section>
 
-      <div className="footer">
-        <Footer />
-      </div>
+      
     </>
   );
 };

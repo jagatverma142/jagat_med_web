@@ -21,7 +21,6 @@
 /* --- 2. Main Layout Wrapper --- */
 .ncert-layout {
   background-color: var(--bg-dark);
-  color: var(--text-primary);
   display: flex;
   min-height: 100vh;
   position: relative;
@@ -32,7 +31,6 @@
 /* --- 3. Sidebar Styling --- */
 .sidebar {
   width: var(--sidebar-width);
-  background-color: var(--bg-card);
   border-right: 1px solid var(--border-color);
   display: flex;
   flex-direction: column;
@@ -58,7 +56,7 @@
 .sidebar-header h2 {
   font-size: 1.25rem;
   font-weight: 700;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   margin: 0;
 }
 
@@ -85,8 +83,8 @@
 }
 
 .chapter-item:hover {
-  background-color: rgba(255, 255, 255, 0.05);
-  color: var(--text-primary);
+  background-color: rgba(214, 196, 196, 0.05);
+  color: var(--accent-green);
 }
 
 .chapter-item.active {
@@ -146,8 +144,6 @@
 
 .ncert-layout .back-btn:hover, 
 .ncert-layout .tool-btn:hover {
-  border-color: var(--text-primary);
-  color: var(--text-primary);
   background: #334155;
 }
 
@@ -338,7 +334,6 @@
 
 .notes-header h3 {
   margin: 0;
-  color: var(--text-primary);
 }
 
 .notes-area {
@@ -413,4 +408,12 @@
   .notes-drawer {
     width: 100%;
   }
+
+  /* Badge Animation */
+.badge {
+  background: #e74c3c; color: white; font-size: 0.6rem; padding: 2px 6px;
+  border-radius: 4px; animation: pulse 1.5s infinite; vertical-align: middle;
+}
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.6; } 100% { opacity: 1; } }
+
 }

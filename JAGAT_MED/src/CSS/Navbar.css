@@ -58,7 +58,7 @@ header.sticky .navbar { padding: 10px 5%; }
 /* Focus effect for search box container */
 .search-box:focus-within {
     border-color: var(--primary);
-    background: white;
+    background: rgb(255, 255, 255);
     box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.1);
 }
 

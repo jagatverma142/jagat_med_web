@@ -68,7 +68,7 @@ const NcertLineByline = () => {
       <aside className={`sidebar ${isSidebarOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-header">
           <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-            <h2>Index</h2>
+            <h2 style={{ WebkitTextFillColor:'white'}}>Index</h2>
             {/* Close Icon for Mobile */}
             <button 
               className="tool-btn" 

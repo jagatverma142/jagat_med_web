@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import '../CSS/ChemistryPage.css';
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
 import { Beaker, Atom, ChevronRight } from 'lucide-react';
 
 const ChemistryPage = () => {
@@ -26,7 +24,6 @@ const ChemistryPage = () => {
 
   return (
     <>
-      <Navbar />
       
       <div className="container" style={{ marginTop: '2rem', minHeight: '80vh' }}>
         
@@ -114,7 +111,6 @@ const ChemistryPage = () => {
 
       </div>
 
-      <Footer />
     </>
   );
 };

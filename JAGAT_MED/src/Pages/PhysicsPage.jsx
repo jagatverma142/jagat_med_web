@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import '../CSS/PhysicsPage.css'; // Ensure CSS file is in the same folder
-import Navbar from '../Components/Navbar';
-import Footer from '../Components/Footer';
 
 const PhysicsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');

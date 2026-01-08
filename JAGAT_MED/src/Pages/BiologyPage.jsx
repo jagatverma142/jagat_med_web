@@ -136,9 +136,7 @@ const BiologyPage = () => {
         </section>
       </div>
 
-      <div className="footer">
-        <Footer />
-      </div>
+     
     </>
   );
 };
