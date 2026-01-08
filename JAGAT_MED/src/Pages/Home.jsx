@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 import '../App.css'; 
 
@@ -72,11 +71,7 @@ const Home = () => {
 
   return (
     <>
-      {/* Fix 1: Navbar container ko high z-index diya */}
-      <div className="nav" style={{ position: 'relative', zIndex: 1000 }}>
-        <Navbar />
-      </div>
-      
+     
       {/* Fix 2: 'animate-on-scroll' hata diya taaki yeh Navbar ke upar na aaye */}
       <header className="hero-section" style={{ position: 'relative', zIndex: 1 }}>
         <div className="blob-bg"></div>

@@ -96,8 +96,8 @@ const Navbar = () => {
             </li>
 
             <li className="dropdown">
-              <span className="dropdown-link">
-                Material <span className="badge">New</span>{' '}
+              <span className="dropdown-link" >
+                Material <span className="badge" >New</span>{' '}
                 <i className="fas fa-chevron-down"></i>
               </span>
               <ul className="dropdown-menu">

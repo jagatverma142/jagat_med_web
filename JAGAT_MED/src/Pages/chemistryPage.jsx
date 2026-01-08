@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import '../CSS/ChemistryPage.css';
 import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
-import { Beaker, Atom, Search, Menu, X, ChevronRight } from 'lucide-react';
-import { Form } from 'react-router-dom';
+import { Beaker, Atom, ChevronRight } from 'lucide-react';
 
 const ChemistryPage = () => {
-  // States
   const [activeTab, setActiveTab] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
-  // Data
   const topicsData = [
     { id: 1, title: "General Organic Chem", desc: "Resonance & Inductive Effects", type: "organic", progress: 75, chapters: 3 },
     { id: 2, title: "Periodic Table", desc: "Trends in physical properties", type: "inorganic", progress: 90, chapters: 2 },
@@ -21,7 +17,6 @@ const ChemistryPage = () => {
     { id: 6, title: "P-Block Elements", desc: "Group 13 to 18 trends", type: "inorganic", progress: 0, chapters: 5 },
   ];
 
-  // Combined Filter Logic (Tab + Search)
   const filteredTopics = topicsData.filter(topic => {
     const matchesTab = activeTab === 'all' || topic.type === activeTab;
     const matchesSearch = topic.title.toLowerCase().includes(searchQuery.toLowerCase()) || 
@@ -30,29 +25,14 @@ const ChemistryPage = () => {
   });
 
   return (
-
     <>
-    
-    <div className="navbar" style={{ position: 'relative', zIndex: 1000 }}>
-        <Navbar />
-    </div>
-    
-    <div className="main-wrapper" style={{ position: 'relative', zIndex: 1 }}>
+      <Navbar />
       
-      {/* --- Responsive Navbar --- */}
-      
-
-      <div className="container">
+      <div className="container" style={{ marginTop: '2rem', minHeight: '80vh' }}>
         
-        {/* Header */}
-        <div style={{marginTop: '2rem'}}>
-          <span className="hero-badge">Class 11 & 12</span>
-          <h1 className="hero-title">Chemistry Mastery</h1>
-        </div>
+        <span className="hero-badge">Class 11 & 12</span>
+        <h1 className="hero-title">Chemistry Mastery</h1>
 
-        
-
-        {/* Dashboard Stats */}
         <div className="stats-container">
           <div className="stat-item">
             <h2>{topicsData.length}</h2>
@@ -68,7 +48,6 @@ const ChemistryPage = () => {
           </div>
         </div>
 
-        {/* Interactive Tabs */}
         <div className="tabs">
           <button 
             className={`tab-btn ${activeTab === 'all' ? 'active' : ''}`}
@@ -90,18 +69,17 @@ const ChemistryPage = () => {
           </button>
         </div>
 
-        {/* --- Content Grid --- */}
         <div className="topics-grid">
           {filteredTopics.length > 0 ? (
             filteredTopics.map((topic) => (
               <div key={topic.id} className={`card ${topic.type}`}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'start'}}>
                   <div className={`icon-box ${topic.type === 'organic' ? 'bg-green-900' : 'bg-blue-900'}`} 
-                       style={{
-                         background: topic.type === 'organic' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(59, 130, 246, 0.1)',
-                         color: topic.type === 'organic' ? '#22c55e' : '#3b82f6',
-                         padding: '8px', borderRadius: '8px', width: 'fit-content', marginBottom:'10px'
-                       }}>
+                        style={{
+                          background: topic.type === 'organic' ? 'rgba(34, 197, 94, 0.1)' : 'rgba(59, 130, 246, 0.1)',
+                          color: topic.type === 'organic' ? '#22c55e' : '#3b82f6',
+                          padding: '8px', borderRadius: '8px', width: 'fit-content', marginBottom:'10px'
+                        }}>
                     {topic.type === 'organic' ? <Beaker size={24}/> : <Atom size={24}/>}
                   </div>
                   <span style={{fontSize:'12px', color:'#64748b'}}>{topic.chapters} Ch</span>
@@ -110,7 +88,6 @@ const ChemistryPage = () => {
                 <h3>{topic.title}</h3>
                 <p style={{flexGrow: 1}}>{topic.desc}</p>
 
-                {/* Custom Progress Bar */}
                 <div style={{background: '#334155', height: '4px', borderRadius: '4px', overflow:'hidden', marginBottom:'5px'}}>
                   <div style={{
                     width: `${topic.progress}%`, 
@@ -123,7 +100,6 @@ const ChemistryPage = () => {
                   {topic.progress}% Completed
                 </div>
 
-                {/* Call to Action Button */}
                 <button className="card-cta">
                   Continue Learning <ChevronRight size={16} style={{verticalAlign:'middle'}}/>
                 </button>
@@ -137,13 +113,9 @@ const ChemistryPage = () => {
         </div>
 
       </div>
-      
-    </div>
-    
 
-
+      <Footer />
     </>
-    
   );
 };
 
