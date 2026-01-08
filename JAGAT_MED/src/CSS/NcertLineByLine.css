@@ -309,6 +309,7 @@
   width: 350px;
   height: 100vh;
   background: var(--bg-card);
+  
   border-left: 1px solid var(--border-color);
   padding: 1.5rem;
   transform: translateX(100%);

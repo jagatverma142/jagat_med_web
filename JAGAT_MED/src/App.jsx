@@ -12,6 +12,7 @@ import NcertLineByLine from "./Pages/NcertLineByLine";
 // import Practice from "./pages/Practice";
 // import Updates from "./pages/Updates";
 // import Login from "./pages/Login";
+import HandwrittenNotes from "./Pages/HandwrittenNotes";
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         {/* <Route path="/material" element={<Material />} /> */}
         <Route path="/chemistry" element={<ChemistryPage />} />
         <Route path="/material/ncert" element={<NcertLineByLine />} />
+        <Route path="/material/notes" element={<HandwrittenNotes />} />
    {/* <Route path="/login" element={<Login />} /> */}
 
       </Routes>

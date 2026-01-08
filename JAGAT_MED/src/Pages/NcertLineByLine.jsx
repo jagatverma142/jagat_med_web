@@ -211,7 +211,7 @@ const NcertLineByline = () => {
       {/* --- Notes Drawer (Right Side) --- */}
       <div className={`notes-drawer ${isNotesOpen ? 'open' : ''}`}>
         <div className="notes-header">
-          <h3>My Notes ({activeChapterId})</h3>
+          <h3 style={{ color: 'white' }}>My Notes </h3>
           <button className="tool-btn" onClick={() => setIsNotesOpen(false)}>
             <X size={18} />
           </button>
