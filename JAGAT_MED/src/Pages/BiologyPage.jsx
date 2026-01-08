@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import '../CSS/BiologyPage.css'; 
 import '../CSS/Navbar.css';
 import '../CSS/Footer.css';
-import Navbar from '../Components/Navbar';
 import Footer from '../Components/Footer';
 
 const BiologyPage = () => {
@@ -53,10 +52,7 @@ const BiologyPage = () => {
 
   return (
     <>
-      {/* Fix 1: Navbar container ko high z-index diya */}
-      <div className="nav" style={{ position: 'relative', zIndex: 1000 }}>
-        <Navbar />
-      </div>
+     
       
       <div className="bio-container " style={{ position: 'relative', zIndex: 1 }}>
         {/* Hero Section */}
