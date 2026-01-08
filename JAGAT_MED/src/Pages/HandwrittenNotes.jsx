@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './HandwrittenNotes.css';
+import '../CSS/HandwrittenNotes.css';
 import { Search, Download, Eye, FileText } from 'lucide-react'; // Icons ke liye (Optional, ya standard <i> use karein)
 
 const HandwrittenNotes = () => {
