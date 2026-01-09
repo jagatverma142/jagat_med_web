@@ -1,0 +1,374 @@
+/* --- Imports & Variables --- */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --bg-dark: #0f172a;
+  --bg-card: #1e293b;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --primary-green: #22c55e;
+  --primary-blue: #3b82f6;
+  --border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* --- Container & Background --- */
+.pyq-container {
+  min-height: 100vh;
+  background-color: var(--bg-dark);
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  padding-bottom: 5rem;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Floating Blobs */
+.blob {
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(80px);
+  z-index: 0;
+  opacity: 0.2;
+}
+.blob-green { top: -50px; left: -50px; background: var(--primary-green); animation: float 10s infinite alternate; }
+.blob-blue { bottom: 100px; right: -50px; background: var(--primary-blue); animation: float 12s infinite alternate-reverse; }
+
+@keyframes float {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(40px); }
+}
+
+/* --- Hero --- */
+.pyq-hero {
+  text-align: center;
+  padding: 5rem 1.5rem 2.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.pyq-badge {
+  display: inline-block;
+  background: rgba(34, 197, 94, 0.1);
+  color: var(--primary-green);
+  padding: 6px 16px;
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid rgba(34, 197, 94, 0.2);
+  margin-bottom: 1rem;
+}
+
+.pyq-title {
+  font-size: 3rem;
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 0.5rem;
+}
+
+.text-highlight {
+  color: var(--primary-green);
+  text-decoration: underline wavy rgba(34, 197, 94, 0.3);
+  text-underline-offset: 8px;
+}
+
+.pyq-subtitle {
+  color: var(--text-muted);
+  max-width: 550px;
+  margin: 0 auto;
+  font-size: 1.1rem;
+}
+
+/* --- Controls (Sticky) --- */
+.pyq-controls-wrapper {
+  position: sticky;
+  top: 10px;
+  z-index: 50;
+  padding: 0 1rem;
+  margin-bottom: 2rem;
+}
+
+.pyq-controls {
+  max-width: 1100px;
+  margin: 0 auto;
+  background: rgba(30, 41, 59, 0.85);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 10px 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.pyq-tabs-scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 2px;
+  scrollbar-width: none;
+}
+.pyq-tabs-scroll::-webkit-scrollbar { display: none; }
+
+.pyq-chip {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted);
+  padding: 8px 18px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: 0.2s;
+}
+
+.pyq-chip:hover { color: white; background: rgba(255,255,255,0.05); }
+.pyq-chip.active {
+  background: var(--bg-dark);
+  color: var(--primary-green);
+  border-color: var(--primary-green);
+  font-weight: 700;
+}
+
+.pyq-actions {
+  display: flex;
+  gap: 10px;
+  flex-grow: 1;
+  justify-content: flex-end;
+}
+
+/* Custom Inputs */
+.custom-select, .custom-search {
+  position: relative;
+  background: var(--bg-dark);
+  border: 1px solid var(--border-color);
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+}
+
+.input-icon { color: var(--text-muted); margin-right: 5px; }
+
+.custom-select select, .custom-search input {
+  background: transparent;
+  border: none;
+  color: white;
+  padding: 10px;
+  outline: none;
+  font-size: 0.9rem;
+}
+
+.custom-select select { cursor: pointer; min-width: 100px; }
+.custom-select select option { background: var(--bg-dark); }
+.custom-search input { width: 140px; transition: width 0.3s; }
+.custom-search input:focus { width: 180px; }
+
+/* --- Grid & Card --- */
+.pyq-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+  z-index: 1;
+}
+
+.pyq-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.pyq-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--primary-green);
+  box-shadow: 0 15px 30px -10px rgba(34, 197, 94, 0.15);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.exam-badge {
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  letter-spacing: 0.5px;
+}
+.jee { background: rgba(59, 130, 246, 0.15); color: #60a5fa; }
+.neet { background: rgba(34, 197, 94, 0.15); color: #4ade80; }
+.board { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+
+.bookmark-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: 0.2s;
+}
+.bookmark-btn:hover, .bookmark-btn.active { color: #f43f5e; transform: scale(1.1); }
+
+.card-mid {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 1.5rem;
+  align-items: flex-start;
+}
+
+.icon-circle {
+  width: 45px; height: 45px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.05);
+}
+.icon-circle.physics { color: #60a5fa; }
+.icon-circle.chemistry { color: #f472b6; }
+.icon-circle.maths { color: #fbbf24; }
+.icon-circle.biology { color: #34d399; }
+
+.paper-info h3 {
+  font-size: 1.1rem;
+  margin: 0 0 6px 0;
+  line-height: 1.3;
+}
+
+.meta-tags {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.card-bottom {
+  margin-top: auto;
+  display: flex;
+  gap: 10px;
+}
+
+.btn-secondary, .btn-primary {
+  flex: 1;
+  padding: 10px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: 0.2s;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border-color);
+  color: var(--text-main);
+}
+.btn-secondary:hover { background: rgba(255,255,255,0.05); border-color: white; }
+
+.btn-primary {
+  background: var(--primary-green);
+  border: none;
+  color: #000;
+}
+.btn-primary:hover { background: #16a34a; }
+.btn-primary.downloading { background: var(--bg-dark); color: var(--primary-green); border: 1px solid var(--primary-green); }
+
+.spin { animation: spin 1s linear infinite; }
+@keyframes spin { 100% { transform: rotate(360deg); } }
+
+/* --- Skeleton Loader --- */
+.skeleton-card { pointer-events: none; border-color: transparent; }
+.sk-header, .sk-body, .sk-footer {
+  background: rgba(255,255,255,0.05);
+  border-radius: 8px;
+  overflow: hidden;
+  position: relative;
+}
+.sk-header { height: 20px; width: 60%; margin-bottom: 20px; }
+.sk-body { height: 60px; width: 100%; margin-bottom: 20px; }
+.sk-footer { height: 35px; width: 100%; }
+
+.skeleton-card div::after {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.05), transparent);
+  animation: shimmer 1.5s infinite;
+}
+@keyframes shimmer { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  background: rgba(0,0,0,0.8);
+  backdrop-filter: blur(5px);
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-content {
+  background: var(--bg-card);
+  width: 100%; max-width: 500px;
+  border-radius: 20px;
+  border: 1px solid var(--border-color);
+  padding: 2rem;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+.modal-close {
+  position: absolute; top: 15px; right: 15px;
+  background: transparent; border: none; color: var(--text-muted); cursor: pointer;
+}
+
+.modal-header h2 { font-size: 1.5rem; margin: 10px 0; }
+.modal-stats {
+  display: flex; gap: 15px; margin: 1.5rem 0;
+  background: rgba(0,0,0,0.2); padding: 15px; border-radius: 12px;
+}
+.stat-box { display: flex; flex-direction: column; align-items: center; flex: 1; }
+.stat-box .label { font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; }
+.stat-box .value { font-weight: 700; color: var(--primary-green); }
+
+.modal-desc { color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; font-size: 0.95rem; }
+
+.modal-cta-btn {
+  width: 100%; padding: 14px; background: var(--primary-green);
+  border: none; border-radius: 12px; font-weight: 700; cursor: pointer;
+  color: black; transition: 0.2s;
+}
+.modal-cta-btn:hover { background: #15803d; color: white; }
+
+@keyframes slideUp { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+/* --- Mobile --- */
+@media (max-width: 768px) {
+  .pyq-hero { padding-top: 4rem; }
+  .pyq-title { font-size: 2.2rem; }
+  .pyq-controls { flex-direction: column; align-items: stretch; gap: 15px; }
+  .pyq-actions { flex-direction: column; }
+  .custom-select, .custom-search { width: 100%; }
+  .custom-search input { width: 100%; }
+}

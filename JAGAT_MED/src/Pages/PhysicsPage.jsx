@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import '../CSS/PhysicsPage.css'; // Ensure CSS file is in the same folder
+import '../CSS/PhysicsPage.css'; 
+
+// IMPORTANT: Import your Navbar and Footer components here
 
 const PhysicsPage = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -10,32 +12,17 @@ const PhysicsPage = () => {
     setOpenFaqIndex(openFaqIndex === index ? null : index);
   };
 
-  // Dummy Data for Chapters (Extended)
+  // Data
   const chapters = [
-    {
-      id: 1, title: 'Units & Measurements', description: 'Dimensional analysis, error calculation and significant figures.', difficulty: 'Easy', progress: 100,
-    },
-    {
-      id: 2, title: 'Kinematics', description: 'Motion in 1D & 2D, vectors, projectiles and relative velocity.', difficulty: 'Medium', progress: 65,
-    },
-    {
-      id: 3, title: 'Laws of Motion', description: 'Newtons laws, friction, circular motion and dynamics.', difficulty: 'Hard', progress: 30,
-    },
-    {
-      id: 4, title: 'Work, Energy & Power', description: 'Conservation of energy, collisions and potential energy curves.', difficulty: 'Medium', progress: 0,
-    },
-    {
-      id: 5, title: 'Rotational Motion', description: 'Moment of inertia, torque, angular momentum and rolling motion.', difficulty: 'Hard', progress: 10,
-    },
-    {
-      id: 6, title: 'Gravitation', description: 'Keplers laws, gravitational potential, and escape velocity.', difficulty: 'Easy', progress: 0,
-    },
-    {
-      id: 7, title: 'Thermodynamics', description: 'Laws of thermodynamics, heat engines, and entropy.', difficulty: 'Hard', progress: 0,
-    }
+    { id: 1, title: 'Units & Measurements', description: 'Dimensional analysis, error calculation and significant figures.', difficulty: 'Easy', progress: 100 },
+    { id: 2, title: 'Kinematics', description: 'Motion in 1D & 2D, vectors, projectiles and relative velocity.', difficulty: 'Medium', progress: 65 },
+    { id: 3, title: 'Laws of Motion', description: 'Newtons laws, friction, circular motion and dynamics.', difficulty: 'Hard', progress: 30 },
+    { id: 4, title: 'Work, Energy & Power', description: 'Conservation of energy, collisions and potential energy curves.', difficulty: 'Medium', progress: 0 },
+    { id: 5, title: 'Rotational Motion', description: 'Moment of inertia, torque, angular momentum and rolling motion.', difficulty: 'Hard', progress: 10 },
+    { id: 6, title: 'Gravitation', description: 'Keplers laws, gravitational potential, and escape velocity.', difficulty: 'Easy', progress: 0 },
+    { id: 7, title: 'Thermodynamics', description: 'Laws of thermodynamics, heat engines, and entropy.', difficulty: 'Hard', progress: 0 }
   ];
 
-  // Quick Resources Data
   const resources = [
     { id: 1, title: 'Formula Sheet', icon: '📐', desc: 'All formulas in one place' },
     { id: 2, title: 'PYQ Papers', icon: '📝', desc: 'Last 10 years questions' },
@@ -43,7 +30,6 @@ const PhysicsPage = () => {
     { id: 4, title: 'Mock Tests', icon: '🎯', desc: 'Test your knowledge' },
   ];
 
-  // FAQ Data
   const faqs = [
     { question: "Is this course sufficient for NEET/JEE?", answer: "Yes, our content covers the entire NCERT syllabus along with advanced problem-solving techniques required for competitive exams." },
     { question: "How can I clear my backlogs?", answer: "Use our 'One Shot' videos in the Revision section. Focus on high-weightage chapters first like Mechanics and Electrodynamics." },
@@ -57,16 +43,14 @@ const PhysicsPage = () => {
   );
 
   return (
-    <>
-      {/* Navbar Container */}
-      <div className="nav" style={{ position: 'relative', zIndex: 1000 }}>
-        <Navbar />
-      </div> 
+    <div className="page-container">
+      {/* Navbar Wrapper */}
+      
     
-      <div className="physics-wrapper" style={{ position: 'relative', zIndex: 1 }}>
+      <div className="physics-wrapper">
         
         {/* --- Header Section --- */}
-        <header className="phys-header">
+        <header className="phys-header" style={{ position: 'relative', zIndex: 1 }}>
           <span className="phys-tag">Physics Class 11</span>
           <h1 className="phys-title">Master Concepts</h1>
           <p className="phys-subtitle">
@@ -90,15 +74,15 @@ const PhysicsPage = () => {
           </div>
         </header>
 
-        {/* --- Daily Challenge Banner (New Feature) --- */}
-        <div className="phys-banner-container">
-          <div className="phys-challenge-banner">
-            <div className="phys-banner-text">
-              <h3>🔥 Daily Challenge</h3>
-              <p>Solve 5 questions on <strong>Rotational Motion</strong> to keep your streak alive!</p>
+        {/* --- Daily Challenge Banner --- */}
+        <div className="phys-challenge-banner">
+            <div className="phys-banner-content">
+              <div className="phys-banner-text">
+                <h3>🔥 Daily Challenge</h3>
+                <p>Solve 5 questions on <strong>Rotational Motion</strong> to keep your streak alive!</p>
+              </div>
+              <button className="phys-btn-banner">Accept Challenge</button>
             </div>
-            <button className="phys-btn-banner">Accept Challenge</button>
-          </div>
         </div>
 
         {/* --- Search Section --- */}
@@ -118,7 +102,7 @@ const PhysicsPage = () => {
           </div>
         </div>
 
-        {/* --- Quick Resources Section (New Feature) --- */}
+        {/* --- Quick Resources --- */}
         <div className="phys-section-title">
             <h2>Quick Resources</h2>
         </div>
@@ -147,6 +131,7 @@ const PhysicsPage = () => {
                   <span className={`phys-badge ${chapter.difficulty.toLowerCase()}`}>
                     {chapter.difficulty}
                   </span>
+                  {/* Lock/Unlock Icon Logic could go here */}
                   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#94a3b8" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path>
                     <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
@@ -180,13 +165,13 @@ const PhysicsPage = () => {
               </div>
             ))
           ) : (
-            <div style={{ gridColumn: '1 / -1', textAlign: 'center', color: '#94a3b8', padding: '2rem' }}>
+            <div className="no-results">
               No chapters found matching "{searchTerm}"
             </div>
           )}
         </div>
 
-        {/* --- FAQ Section (New Feature) --- */}
+        {/* --- FAQ Section --- */}
         <div className="phys-faq-section">
             <h2 className="phys-faq-title">Frequently Asked Questions</h2>
             <div className="phys-faq-list">
@@ -210,8 +195,7 @@ const PhysicsPage = () => {
 
       </div>
       
-      <Footer />
-    </>
+    </div>
   );
 };
 
