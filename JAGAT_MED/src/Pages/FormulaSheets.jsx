@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './FormulaSheets.css';
+import '../CSS/FormulaSheets.css';
 import { Search, Download, Eye, FileSpreadsheet, Atom, FlaskConical, Sigma, Zap } from 'lucide-react';
 
 const FormulaSheets = () => {
@@ -88,6 +88,9 @@ const FormulaSheets = () => {
   });
 
   return (
+    <>
+    
+    
     <div className="formula-page-container">
       {/* --- Hero Section --- */}
       <div className="formula-hero">
@@ -194,6 +197,9 @@ const FormulaSheets = () => {
         )}
       </div>
     </div>
+    
+    </>
+    
   );
 };
 
