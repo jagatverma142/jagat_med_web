@@ -14,6 +14,7 @@ import NcertLineByLine from "./Pages/NcertLineByLine";
 // import Login from "./pages/Login";
 import HandwrittenNotes from "./Pages/HandwrittenNotes";
 import FormulaSheets from "./Pages/FormulaSheets";
+import MindMapPage from "./Pages/MindMapPage";
 
 function App() {
   return (
@@ -37,6 +38,8 @@ function App() {
         <Route path="/material/ncert" element={<NcertLineByLine />} />
         <Route path="/material/notes" element={<HandwrittenNotes />} />
         <Route path="/material/formulas" element={<FormulaSheets />} />
+        <Route path="/material/mindmaps" element={<MindMapPage />} />
+
 
    {/* <Route path="/login" element={<Login />} /> */}
 
