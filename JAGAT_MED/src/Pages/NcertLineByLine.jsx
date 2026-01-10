@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../CSS/NcertLineByline.css';      // Wahi CSS jo maine pichle response me di thi (scoped wali)
+import '../CSS/NcertLineByLine.css';      // Wahi CSS jo maine pichle response me di thi (scoped wali)
 import { 
   Eye, EyeOff, FileText, ChevronLeft, HelpCircle, 
   Brain, Menu, X, Save, CheckCircle, AlertCircle, Clock 
