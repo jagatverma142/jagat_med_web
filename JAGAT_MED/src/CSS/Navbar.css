@@ -94,10 +94,13 @@ header.sticky .navbar { padding: 12px 5%; }
 
 /* Badge Pulse */
 .badge {
-  background: #e74c3c; color: white; font-size: 0.65rem; padding: 3px 7px;
+  background: #e74c3c; color:#e74c3c; font-size: 0.65rem; padding: 3px 7px;
   border-radius: 10px; font-weight: 600; margin-left: 5px;
   box-shadow: 0 2px 5px rgba(231, 76, 60, 0.4);
   animation: pulse-glow 2s infinite;
+}
+span.badge{
+  background: #e74c3c;
 }
 @keyframes pulse-glow { 
   0% { transform: scale(1); box-shadow: 0 0 0 0 rgba(231, 76, 60, 0.7); } 

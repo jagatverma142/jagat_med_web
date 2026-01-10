@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import '../App.css'; 
+import "../CSS/style.css"; 
 
 const Home = () => {
   const [statsTriggered, setStatsTriggered] = useState(false);
@@ -91,7 +91,7 @@ const Home = () => {
             <button className="hero-search-btn">🔍</button>
           </div>
 
-          <div className="hero-buttons">
+          <div className="hero-buttons" >
             <button className="btn-primary">Start Learning</button>
             <button className="btn-secondary" >View Syllabus</button>
           </div>
