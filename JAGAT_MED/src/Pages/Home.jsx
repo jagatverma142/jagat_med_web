@@ -77,7 +77,7 @@ const Home = () => {
         
         <div className="hero-content">
           <div className="tag-pill"><span className="dot"></span> #1 Learning Platform</div>
-          <h1>Master Your Exams with <br /><span className="text-gradient">Jagat Prep</span></h1>
+          <h1 style={{textcolor:"black"}}>Master Your Exams with <br /><span className="text-gradient">Jagat Prep</span></h1>
           <p>Access comprehensive study materials, mock tests, and personalized guidance to crack your dream exam.</p>
           
           <div className="hero-search-container">
@@ -93,7 +93,7 @@ const Home = () => {
 
           <div className="hero-buttons">
             <button className="btn-primary">Start Learning</button>
-            <button className="btn-secondary">View Syllabus</button>
+            <button className="btn-secondary" >View Syllabus</button>
           </div>
         </div>
 
