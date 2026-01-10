@@ -48,7 +48,8 @@ body {
 .stats-container {
   display: flex;
   justify-content: center;
-  gap: 8rem;
+  gap: 10rem;
+  padding-top: 8rem;
   margin-bottom: 5rem;
   animation: fadeIn 0.8s ease-out;
 }
