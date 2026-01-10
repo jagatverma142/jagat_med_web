@@ -33,7 +33,7 @@ function App() {
         <Route path="/biology" element={<BiologyPage />} />
         <Route path="/chemistry" element={<ChemistryPage />} />
         <Route path="/physics" element={<PhysicsPage />} />
-        <Route path="/ncert" element={<NcertLineByLine />} />
+        <Route path="/material/ncert" element={<NcertLineByLine />} />
         <Route path="/material/notes" element={<HandwrittenNotes />} />
         <Route path="/material/formulas" element={<FormulaSheets />} />
         <Route path="/material/mindmaps" element={<MindMapPage />} />
