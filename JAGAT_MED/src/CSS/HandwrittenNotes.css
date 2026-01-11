@@ -24,7 +24,8 @@
 /* --- Hero Section --- */
 .notes-hero {
   text-align: center;
-  padding: 4rem 1rem 2.5rem 1rem;
+  padding: 50px;
+  padding-left: 20rem;
   /* Subtle glow at top */
   background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
 }
@@ -63,6 +64,13 @@
   filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.3));
 }
 
+
+.hero-content.fade-in-up{
+
+  text-align: center;
+
+}
+
 .hero-subtitle {
   color: var(--local-text-muted);
   font-size: 1.1rem;
@@ -86,11 +94,13 @@
 /* Stylish Tab Container */
 .tabs-container {
   display: flex;
+  text-align: center;
   background: #172033; /* Slightly lighter than bg */
   padding: 6px;
   border-radius: 12px;
   border: 1px solid var(--local-border);
   gap: 5px;
+  margin-left: 23rem;
 }
 
 .filter-btn {
@@ -120,11 +130,14 @@
 /* --- White Search Box --- */
 .search-box {
   position: relative;
+  text-align: ;
   width: 320px;
+  margin-top: 100px;
 }
 
 .search-box input {
   width: 100%;
+  text-align: center;
   background: #ffffff;
   border: 2px solid transparent;
   padding: 14px 14px 14px 45px;
@@ -138,7 +151,8 @@
 }
 
 .search-box input::placeholder {
-  color: #64748b;
+  
+  color: black;
 }
 
 .search-box input:focus {

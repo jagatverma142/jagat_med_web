@@ -20,6 +20,7 @@
 
 /* --- 2. Main Layout Wrapper --- */
 .ncert-layout {
+  text-align: center;
   background-color: var(--bg-dark);
   display: flex;
   min-height: 100vh;
