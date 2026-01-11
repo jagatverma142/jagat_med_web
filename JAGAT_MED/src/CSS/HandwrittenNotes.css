@@ -23,24 +23,16 @@
 
 /* --- Hero Section --- */
 .notes-hero {
+  width: 100%;
   text-align: center;
-  padding: 50px;
-  padding-left: 20rem;
-  /* Subtle glow at top */
+  padding: 80px 20px;
+  /* Removed padding-left: 20rem to center text */
   background: radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent 70%);
 }
 
-.badge-new {
-  background: rgba(139, 92, 246, 0.1);
-  color: #a78bfa; /* Lighter Purple */
-  padding: 6px 14px;
-  border-radius: 20px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  border: 1px solid rgba(139, 92, 246, 0.3);
-  margin-bottom: 1.5rem;
-  display: inline-block;
-  box-shadow: 0 0 10px rgba(139, 92, 246, 0.1);
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto; /* Centers the content box */
 }
 
 .hero-title {
@@ -48,11 +40,8 @@
   font-weight: 800;
   color: var(--local-text);
   margin-bottom: 0.8rem;
-  line-height: 1.1;
-  letter-spacing: -1px;
 }
 
-/* "Handwritten" Text with Gradient */
 .handwritten-highlight {
   font-family: 'Dancing Script', cursive;
   background: linear-gradient(135deg, #22c55e 0%, #3b82f6 100%);
@@ -60,8 +49,6 @@
   -webkit-text-fill-color: transparent;
   font-weight: 700;
   font-size: 4rem;
-  margin-left: 10px;
-  filter: drop-shadow(0 0 5px rgba(34, 197, 94, 0.3));
 }
 
 
@@ -92,85 +79,58 @@
 }
 
 /* Stylish Tab Container */
+.controls-bar {
+  display: flex;
+  flex-direction: column; /* Stacked for better centering control */
+  align-items: center;
+  gap: 5px;
+  width: 50%;
+  max-width: 1100px;
+  margin: 0 auto 3rem auto;
+  padding: 0 1.5rem;
+}
+
 .tabs-container {
   display: flex;
-  text-align: center;
-  background: #172033; /* Slightly lighter than bg */
+  background: var(--brand-green)  ;
   padding: 6px;
   border-radius: 12px;
   border: 1px solid var(--local-border);
   gap: 5px;
-  margin-left: 23rem;
-}
+  }
 
-.filter-btn {
-  background: transparent;
-  color: var(--local-text-muted);
-  border: none;
-  padding: 8px 24px;
-  border-radius: 8px;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-}
 
-.filter-btn:hover {
-  color: var(--local-text);
-  background: var(--brand-green);
-}
-
-/* Active Tab Pop */
-.filter-btn.active {
-  background: var(--brand-green);
-  color: white;
-  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
-}
 button.filter-btn.active{
-  background-color: #22c55e ;
+  background-color: var(--brand-green);
 }
 
-/* --- White Search Box --- */
-.search-box {
+.search-wrapper {
   position: relative;
-  width: 320px;
-  margin-top: 100px;
-  justify-content: center;
-  text-justify: auto;
-}
-
-.search-box input {
   width: 100%;
-  text-align: center;
-  background: #ffffff;
-  border: 2px solid transparent;
-  padding: 14px 14px 14px 45px;
+  max-width: 400px; /* Centered search bar width */
+}
+
+.search-wrapper input {
+  width: 100%;
+  background: var(--local-card); /* Fixed: changed from --bg-card */
+  border: 1px solid var(--local-border); /* Fixed: changed from --border-color */
+  padding: 12px 12px 12px 45px;
   border-radius: 12px;
-  color: #000;                         
-  font-weight: 500;
+  color: white;
   outline: none;
-  font-size: 0.95rem;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deep Shadow */
-  transition: all 0.3s ease;
 }
 
-.search-box input::placeholder {
-  
-  color: black;
-}
-
-.search-box input:focus {
-  box-shadow: 0 0 0 4px --brand-green(139, 92, 246, 0.2);
-  transform: translateY(-2px);
+.search-wrapper input:focus {
+  border-color: var(--accent-blue);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .search-icon {
   position: absolute;
-  left: 15px;
+  left: 14px;
   top: 50%;
   transform: translateY(-50%);
-  color: #64748b;
-  pointer-events: none;
+  color: var(--text-secondary);
 }
 
 /* --- Notes Grid --- */

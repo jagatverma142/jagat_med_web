@@ -108,7 +108,6 @@ const HandwrittenNotes = () => {
                 <div className="card-footer">
                   <span className="file-size">{note.size}</span>
                   <div className="action-buttons-notes">
-                      <button className="btn-preview"><Eye size={16}/></button>
                       <button className="btn-download">
                           Download <Download size={16}/>
                       </button>

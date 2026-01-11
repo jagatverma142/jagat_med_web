@@ -9,6 +9,7 @@
   --text-muted: #94a3b8;    /* Grey Text */
   --accent-primary: #38bdf8; /* Clean Blue Accent */
   --border-light: rgba(255, 255, 255, 0.1);
+  --brand-green : #22c55e;
   
   font-family: 'Outfit', sans-serif;
   background-color: var(--bg-deep);
@@ -92,7 +93,7 @@
 
 .filter-btn {
   background: transparent;
-  color: var(--text-muted);
+  color: var(--white);
   border: none;
   padding: 10px 24px;
   border-radius: 8px;
@@ -110,7 +111,7 @@
 
 .filter-btn.active {
   background: var(--accent-primary);
-  color: #0f172a; /* Dark text for contrast */
+  color: green; /* Dark text for contrast */
 }
 
 /* Search Box */

@@ -178,9 +178,7 @@ const FormulaSheets = () => {
                   </div>
                   
                   <div className="action-row">
-                    <button className="btn-icon" title="Preview">
-                        <Eye size={18} />
-                    </button>
+                    
                     <button className="btn-download-full" style={{background: sheet.color}}>
                         Download <Download size={16} />
                     </button>
