@@ -8,9 +8,11 @@ const Navbar = () => {
   const [isSticky, setIsSticky] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
 
+  const [indicator, setIndicator] = useState({ left: 0, width: 0, show: false });
+
   const location = useLocation();
   const menuBtnRef = useRef(null);
-  const menuPanelRef = useRef(null);
+  const navListRef = useRef(null);
 
   const navItems = useMemo(
     () => [
@@ -56,38 +58,33 @@ const Navbar = () => {
   const Icons = {
     ChevronDown: ({ rotated }) => (
       <svg
-        style={{ transform: rotated ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.3s" }}
-        width="16"
-        height="16"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="2.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
+        style={{ transform: rotated ? "rotate(180deg)" : "rotate(0deg)", transition: "transform 0.25s ease" }}
+        width="16" height="16" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
         aria-hidden="true"
       >
         <polyline points="6 9 12 15 18 9"></polyline>
       </svg>
     ),
     Menu: () => (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+        aria-hidden="true"
+      >
         <line x1="3" y1="12" x2="21" y2="12"></line>
         <line x1="3" y1="6" x2="21" y2="6"></line>
         <line x1="3" y1="18" x2="21" y2="18"></line>
       </svg>
     ),
     Close: () => (
-      <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="none"
+        stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"
+        aria-hidden="true"
+      >
         <line x1="18" y1="6" x2="6" y2="18"></line>
         <line x1="6" y1="6" x2="18" y2="18"></line>
       </svg>
     ),
-  };
-
-  const openMenu = () => {
-    setIsMenuOpen(true);
-    setActiveDropdown(null);
   };
 
   const closeMenu = () => {
@@ -107,16 +104,14 @@ const Navbar = () => {
     closeMenu();
   }, [location]);
 
-  // Sticky + scroll progress
+  // Sticky + progress
   useEffect(() => {
     const handleScroll = () => {
       setIsSticky(window.scrollY > 50);
 
       const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
       const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
-
-      if (scrollHeight > 0) setScrollProgress((scrollTop / scrollHeight) * 100);
-      else setScrollProgress(0);
+      setScrollProgress(scrollHeight > 0 ? (scrollTop / scrollHeight) * 100 : 0);
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
@@ -124,32 +119,65 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Lock background scroll when menu open (mobile usability) [web:133]
+  // Lock background scroll when drawer open
   useEffect(() => {
     const cls = "nav-lock";
     if (isMenuOpen) document.body.classList.add(cls);
     else document.body.classList.remove(cls);
-
     return () => document.body.classList.remove(cls);
   }, [isMenuOpen]);
 
-  // ESC to close
+  // ESC close
   useEffect(() => {
-    const onKey = (e) => {
-      if (e.key === "Escape" && isMenuOpen) closeMenu();
-    };
+    const onKey = (e) => e.key === "Escape" && isMenuOpen && closeMenu();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [isMenuOpen]);
 
-  // Return focus to menu button after closing
+  // Focus return
   useEffect(() => {
     if (!isMenuOpen && menuBtnRef.current) menuBtnRef.current.focus();
   }, [isMenuOpen]);
 
+  // Animated active indicator (desktop)
+  const updateIndicator = () => {
+    const nav = navListRef.current;
+    if (!nav) return;
+
+    const activeEl =
+      nav.querySelector("a.active:not(.btn-login)") ||
+      nav.querySelector('a[aria-current="page"]:not(.btn-login)');
+
+    if (!activeEl) {
+      setIndicator((p) => ({ ...p, show: false }));
+      return;
+    }
+
+    const navRect = nav.getBoundingClientRect();
+    const aRect = activeEl.getBoundingClientRect();
+
+    setIndicator({
+      left: aRect.left - navRect.left,
+      width: aRect.width,
+      show: true,
+    });
+  };
+
+  useEffect(() => {
+    updateIndicator();
+    const onResize = () => updateIndicator();
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+
+  useEffect(() => {
+    // route change -> indicator recalculation after DOM paint
+    requestAnimationFrame(updateIndicator);
+  }, [location.pathname]);
+
   return (
     <>
-      <header id="mainHeader" className={`mainHeader ${isSticky ? "sticky" : ""}`}>
+      <header className={`mainHeader ${isSticky ? "sticky" : ""}`}>
         <nav className="navbar" aria-label="Primary">
           <NavLink to="/" className="logo" onClick={closeMenu}>
             JAGAT<span>PREP</span>
@@ -158,17 +186,23 @@ const Navbar = () => {
           <button
             ref={menuBtnRef}
             type="button"
-            className="menu-toggle"
+            className={`menu-toggle ${isMenuOpen ? "open" : ""}`}
             onClick={toggleMenu}
             aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={isMenuOpen}
             aria-controls="navLinks"
           >
-            {isMenuOpen ? <Icons.Close /> : <Icons.Menu />}
+            <span className="menu-icon">{isMenuOpen ? <Icons.Close /> : <Icons.Menu />}</span>
           </button>
 
-          <div className={`nav-drawer ${isMenuOpen ? "open" : ""}`} ref={menuPanelRef}>
-            <ul className={`nav-links ${isMenuOpen ? "active" : ""}`} id="navLinks">
+          <div className={`nav-drawer ${isMenuOpen ? "open" : ""}`}>
+            <ul className={`nav-links ${isMenuOpen ? "active" : ""}`} id="navLinks" ref={navListRef}>
+              <span
+                className={`active-indicator ${indicator.show ? "show" : ""}`}
+                style={{ transform: `translateX(${indicator.left}px)`, width: `${indicator.width}px` }}
+                aria-hidden="true"
+              />
+
               <li className="mobile-header">
                 <div className="mobile-brand">Menu</div>
                 <button type="button" className="mobile-close" onClick={closeMenu} aria-label="Close menu">
@@ -179,7 +213,7 @@ const Navbar = () => {
               {navItems.map((item) => {
                 if (item.type === "link") {
                   return (
-                    <li key={item.to}>
+                    <li key={item.to} className="nav-item">
                       <NavLink to={item.to} className={({ isActive }) => (isActive ? "active" : "")}>
                         {item.label}
                       </NavLink>
@@ -189,7 +223,7 @@ const Navbar = () => {
 
                 if (item.type === "cta") {
                   return (
-                    <li key={item.to}>
+                    <li key={item.to} className="nav-item">
                       <NavLink to={item.to} className="btn-login">
                         {item.label}
                       </NavLink>
@@ -197,9 +231,8 @@ const Navbar = () => {
                   );
                 }
 
-                // dropdown
                 return (
-                  <li key={item.key} className={`dropdown ${activeDropdown === item.key ? "active" : ""}`}>
+                  <li key={item.key} className={`dropdown nav-item ${activeDropdown === item.key ? "active" : ""}`}>
                     <button
                       type="button"
                       className="dropdown-link"
